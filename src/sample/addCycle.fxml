@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="33.0" layoutY="51.0" prefHeight="86.0" prefWidth="262.0" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="51.0">
+         <children>
+            <Text fx:id="ovenTemperatureText" strokeType="OUTSIDE" strokeWidth="0.0" text="900.0" wrappingWidth="163.13671875">
+               <font>
+                  <Font name="System Bold" size="62.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Degrees">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="50.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <Text layoutX="33.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Oven Temperaure" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="34.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <HBox layoutX="773.0" layoutY="44.0" prefHeight="50.0" prefWidth="163.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="44.0">
+         <children>
+            <Text fx:id="currentTimeText" strokeType="OUTSIDE" strokeWidth="0.0" text="12:33 AM" wrappingWidth="169.13671875">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <Text layoutX="773.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" AnchorPane.rightAnchor="194.419921875" AnchorPane.topAnchor="35.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Circle fill="#ff0505" layoutX="500.0" layoutY="97.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="454.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oven is :" AnchorPane.topAnchor="45.05078125">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="ovenOnOFFText" layoutX="516.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ON">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="selectCycle" layoutX="628.0" layoutY="730.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="145.0" text="ON" />
+      <Button fx:id="selectCycle1" layoutX="805.0" layoutY="730.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="145.0" text="OFF" />
+   </children>
+</AnchorPane>
