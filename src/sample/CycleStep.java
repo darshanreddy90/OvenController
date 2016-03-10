@@ -16,6 +16,7 @@ public class CycleStep {
         this.startTemp = startTemp;
         this.endTemp = endTemp;
         this.timeInMinutes = timeInMinutes;
+        this.timeRemaining = timeInMinutes;
     }
 
     public double getStartTemp() {
@@ -52,5 +53,9 @@ public class CycleStep {
 
     public void handleTimerTick() {
         this.timeRemaining--;
+    }
+
+    public void resetTimeRemaining() {
+        this.timeRemaining = this.timeInMinutes;
     }
 }

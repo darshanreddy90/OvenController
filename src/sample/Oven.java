@@ -38,7 +38,9 @@ public class Oven {
         if (isOvenOn) {
             currentOvenTemperature += 1;
         } else {
+            if(currentOvenTemperature != 0)
             currentOvenTemperature -= 0.5;
         }
+        System.out.println(currentOvenTemperature);
     }
 }

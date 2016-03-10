@@ -29,4 +29,7 @@ public class Cycle {
         return null;
     }
 
+    public LinkedList<CycleStep> getCycleSteps() {
+        return cycleSteps;
+    }
 }
