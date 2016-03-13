@@ -22,16 +22,36 @@ public class CycleExecutor {
 
     public void handleTick() {
         if(currentStep!= null && currentStep.getTimeRemaining() == 0) {
-            currentStep.resetTimeRemaining();
+//            currentStep.resetTimeRemaining();
             if(stepIterator.hasNext()) {
                 currentStep = stepIterator.next();
             }
+        } else if (currentStep == null && stepIterator.hasNext()) {
+            currentStep = stepIterator.next();
+        }else {
+            currentStep.setTimeRemaining(currentStep.getTimeRemaining() - 1);
         }
+
         // Turn oven ON or OFF based on the temperature adjustment in the current step
         // currently doing it randomly
-        if(Math.random()*10%6 < 3){
+        /*if(Math.random()*10%6 < 3){
             oven.turnOvenOff();
         }else {
+            oven.turnOvenOn();
+        }*/
+        checkGrowth();
+    }
+
+    public void checkGrowth(){
+        double growthRate= (Math.abs(currentStep.getStartTemp()-currentStep.getEndTemp())/currentStep.getTimeInMinutes());
+        double currentTime= currentStep.getTimeInMinutes()-currentStep.getTimeRemaining();
+        double expectedTemp=  currentStep.getStartTemp() + (growthRate*(currentTime));
+        if(oven.getCurrentOvenTemperature()>expectedTemp){
+            oven.turnOvenOff();
+        }else if(oven.getCurrentOvenTemperature()<expectedTemp){
+            oven.turnOvenOn();
+        }else if(currentStep.getTimeRemaining()!=0){
+            //do nothing if both are same
             oven.turnOvenOn();
         }
     }
