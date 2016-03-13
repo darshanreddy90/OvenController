@@ -7,9 +7,9 @@ package sample;
  */
 public class CycleStep {
 
-    private double startTemp; // Start temperature of step
-    private double endTemp; //End temperature of step
-    private double timeInMinutes; // time for completing the step
+     double startTemp; // Start temperature of step
+     double endTemp; //End temperature of step
+     double timeInMinutes; // time for completing the step
     private double timeRemaining; // how much time has elapsed in this step
 
     public CycleStep(double startTemp, double endTemp, double timeInMinutes) {

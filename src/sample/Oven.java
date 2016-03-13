@@ -8,6 +8,8 @@ package sample;
 public class Oven {
     private boolean isOvenOn; // To hold the state of the over ON/ oFF. true when oven is ON
     private double currentOvenTemperature; // To hold the current temperature of the oven
+    private Cycle currentCycle;
+    private boolean clearedCycle=false;
 
     public Oven() {
         this.isOvenOn = false;
@@ -27,6 +29,14 @@ public class Oven {
         this.isOvenOn = false;
     }
 
+    public Cycle getCurrentCycle() {
+        return currentCycle;
+    }
+
+    public void setCurrentCycle(Cycle currentCycle) {
+        this.currentCycle = currentCycle;
+    }
+
     public double getCurrentOvenTemperature() {
         return  this.currentOvenTemperature;
     }
@@ -42,5 +52,10 @@ public class Oven {
             currentOvenTemperature -= 0.5;
         }
         System.out.println(currentOvenTemperature);
+    }
+
+    public void clearCycle() {
+        this.clearedCycle = true;
+        this.setCurrentCycle(null);
     }
 }

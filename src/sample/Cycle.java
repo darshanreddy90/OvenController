@@ -15,6 +15,9 @@ import java.util.Scanner;
 public class Cycle {
     private String name;
     private LinkedList<CycleStep> cycleSteps;
+    private CycleStep currentStep;
+    private CycleStep previousStep;
+    private CycleStep nextStep;
 
 
     public Cycle(String name) {
@@ -36,6 +39,38 @@ public class Cycle {
 
     public LinkedList<CycleStep> getCycleSteps() {
         return cycleSteps;
+    }
+
+    public CycleStep getCurrentStep() {
+        return currentStep;
+    }
+
+    public void setCurrentStep(CycleStep currentStep) {
+        this.currentStep = currentStep;
+    }
+
+    public CycleStep getPreviousStep() {
+        return previousStep;
+    }
+
+    public void setPreviousStep(CycleStep previousStep) {
+        this.previousStep = previousStep;
+    }
+
+    public CycleStep getNextStep() {
+        return nextStep;
+    }
+
+    public void setNextStep(CycleStep nextStep) {
+        this.nextStep = nextStep;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static List<Cycle> cycleLoader() throws FileNotFoundException {

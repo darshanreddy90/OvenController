@@ -16,18 +16,22 @@ public class CycleExecutor {
     public CycleExecutor(Cycle cycle, Oven oven) {
         this.cycle = cycle;
         this.oven = oven;
+        this.oven.setCurrentCycle(cycle);
         this.stepIterator = cycle.getCycleSteps().iterator();
     }
 
 
     public void handleTick() {
+        if(oven.getCurrentCycle() == null) {
+            return;
+        }
         if(currentStep!= null && currentStep.getTimeRemaining() == 0) {
 //            currentStep.resetTimeRemaining();
             if(stepIterator.hasNext()) {
-                currentStep = stepIterator.next();
+                setCurrentStep(stepIterator.next());
             }
         } else if (currentStep == null && stepIterator.hasNext()) {
-            currentStep = stepIterator.next();
+            setCurrentStep(stepIterator.next());
         }else {
             currentStep.setTimeRemaining(currentStep.getTimeRemaining() - 1);
         }
@@ -40,6 +44,12 @@ public class CycleExecutor {
             oven.turnOvenOn();
         }*/
         checkGrowth();
+    }
+
+    private  void setCurrentStep(CycleStep step) {
+        cycle.setPreviousStep(currentStep);
+        cycle.setCurrentStep(step);
+        currentStep = step;
     }
 
     public void checkGrowth(){

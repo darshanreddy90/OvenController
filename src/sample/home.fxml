@@ -56,19 +56,19 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <Button fx:id="onBtn" layoutX="628.0" layoutY="730.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="145.0" text="ON" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="227.0" />
-      <Button fx:id="offBtn" layoutX="805.0" layoutY="730.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="145.0" text="OFF" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="40.0" />
+      <Button fx:id="onBtn" layoutX="628.0" layoutY="730.0" mnemonicParsing="false" onAction="#turnOvenOnBtn" prefHeight="56.0" prefWidth="145.0" text="ON" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="227.0" />
+      <Button fx:id="offBtn" layoutX="805.0" layoutY="730.0" mnemonicParsing="false" onAction="#turnOvenOfftn" prefHeight="56.0" prefWidth="145.0" text="OFF" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="40.0" />
       <Button fx:id="selectCycleBtn" layoutX="33.0" layoutY="730.0" mnemonicParsing="false" onAction="#goToSelectCycle" prefHeight="56.0" prefWidth="145.0" text="Select Cycle" />
       <AnchorPane layoutX="38.0" layoutY="200.0" prefHeight="458.0" prefWidth="914.0">
          <children>
-            <AnchorPane layoutX="104.0" layoutY="153.0" prefHeight="150.0" prefWidth="715.0" style="-fx-border-color: red;">
+            <AnchorPane fx:id="currentStepPane" layoutX="104.0" layoutY="153.0" prefHeight="150.0" prefWidth="715.0" style="-fx-border-color: red;">
                <children>
                   <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Step" wrappingWidth="129.13671875">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="145.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="120.6875">
+                  <Text fx:id="cuurentStepStarttxt" layoutX="145.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="120.6875">
                      <font>
                         <Font size="70.0" />
                      </font>
@@ -78,7 +78,7 @@
                         <Font size="21.0" />
                      </font>
                   </Text>
-                  <Text layoutX="314.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="011" wrappingWidth="112.13671875">
+                  <Text fx:id="cuurentStepEndTxt" layoutX="314.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="011" wrappingWidth="112.13671875">
                      <font>
                         <Font size="60.0" />
                      </font>
@@ -88,7 +88,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="500.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:45" wrappingWidth="106.0">
+                  <Text fx:id="cuurentStepTimeTxt" layoutX="500.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:45" wrappingWidth="106.0">
                      <font>
                         <Font size="40.0" />
                      </font>
@@ -96,31 +96,58 @@
                   <Text layoutX="613.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HH:MM" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="104.0" layoutY="304.0" prefHeight="82.0" prefWidth="715.0">
+            <AnchorPane fx:id="nextStepPane" layoutX="104.0" layoutY="304.0" prefHeight="82.0" prefWidth="715.0" style="-fx-border-color: grey;">
                <children>
                   <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Next Step" wrappingWidth="72.5302734375" />
-                  <Text layoutX="199.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="41.19140625">
+                  <Text fx:id="nextStepStartTxt" layoutX="199.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="41.19140625">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Text>
-                  <Text layoutX="316.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="41.19140625">
+                  <Text fx:id="nextStepStopTxt" layoutX="316.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="41.19140625">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Text>
                   <Text layoutX="263.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TO" />
-                  <Text layoutX="412.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="in Time">
+                  <Text layoutX="412.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="in Time">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="489.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:45" wrappingWidth="106.0">
+                  <Text fx:id="nextStepTimeTxt" layoutX="514.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:45" wrappingWidth="72.5302734375">
                      <font>
-                        <Font size="40.0" />
+                        <Font size="20.0" />
                      </font>
                   </Text>
                   <Text layoutX="601.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HH:MM" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="prevStepPane" layoutX="104.0" layoutY="71.0" prefHeight="82.0" prefWidth="715.0" style="-fx-border-color: grey;">
+               <children>
+                  <Text fill="#0000008f" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Previous Step" wrappingWidth="72.5302734375" />
+                  <Text fx:id="previousStepStartTxt" fill="#00000086" layoutX="199.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="41.19140625">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="previousStepEndTxt" fill="#0000009a" layoutX="316.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="41.19140625">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0000009a" layoutX="263.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TO" />
+                  <Text fill="#0000009a" layoutX="412.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="in Time">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="previousStepTimeTxt" fill="#0000009a" layoutX="503.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:45" wrappingWidth="72.5302734375">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#00000098" layoutX="601.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HH:MM" />
                </children>
             </AnchorPane>
          </children>
