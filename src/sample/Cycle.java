@@ -1,6 +1,11 @@
 package sample;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by dxr141430 on 3/9/2016.
@@ -31,5 +36,26 @@ public class Cycle {
 
     public LinkedList<CycleStep> getCycleSteps() {
         return cycleSteps;
+    }
+
+    public static List<Cycle> cycleLoader() throws FileNotFoundException {
+        Scanner scanner;
+        scanner = new Scanner(new File("C:\\Users\\dxr141430\\Documents\\GitHub\\OvenController\\src\\sample\\data.txt"));
+        List<Cycle> cycles = new ArrayList<>();
+        while (scanner.hasNextLine()){
+            String row = scanner.nextLine();
+            cycles.add(Cycle.convertToObjectFromString(row));
+        }
+        return cycles;
+    }
+
+    private static Cycle convertToObjectFromString(String row) {
+        Scanner scanner = new Scanner(row);
+        Cycle cycle = new Cycle(scanner.next());
+        while (scanner.hasNext()) {
+            CycleStep step = new CycleStep(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble());
+            cycle.addStep(step);
+        }
+        return cycle;
     }
 }
