@@ -7,8 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.HomeController">
    <children>
       <HBox layoutX="33.0" layoutY="51.0" prefHeight="130.0" prefWidth="344.0" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="51.0">
          <children>
@@ -59,7 +58,7 @@
       </Text>
       <Button fx:id="onBtn" layoutX="628.0" layoutY="730.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="145.0" text="ON" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="227.0" />
       <Button fx:id="offBtn" layoutX="805.0" layoutY="730.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="145.0" text="OFF" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="40.0" />
-      <Button fx:id="selectCycleBtn" layoutX="33.0" layoutY="730.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="145.0" text="Select Cycle" />
+      <Button fx:id="selectCycleBtn" layoutX="33.0" layoutY="730.0" mnemonicParsing="false" onAction="#goToSelectCycle" prefHeight="56.0" prefWidth="145.0" text="Select Cycle" />
       <AnchorPane layoutX="38.0" layoutY="200.0" prefHeight="458.0" prefWidth="914.0">
          <children>
             <HBox layoutX="133.0" layoutY="137.0" prefHeight="130.0" prefWidth="648.0" />
