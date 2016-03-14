@@ -10,8 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.animation.KeyFrame;
 import sun.dc.pr.PRError;
-
+import javafx.util.Duration;
+import javafx.animation.Animation;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -19,6 +21,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.animation.Timeline;
 
 public class HomeController implements Initializable{
     @FXML
@@ -54,17 +57,7 @@ public class HomeController implements Initializable{
     @FXML
     private AnchorPane prevStepPane;
 
-    @FXML
-    private Text nextStepStartTxt;
 
-    @FXML
-    private Text nextStepStopTxt;
-
-    @FXML
-    private Text nextStepTimeTxt;
-
-    @FXML
-    private AnchorPane nextStepPane;
 
 
     private Oven oven;
@@ -89,14 +82,15 @@ public class HomeController implements Initializable{
 
 
     @FXML
-    private void goToSelectCycle(ActionEvent e){
-        Scene scene1;
-        Parent selectCycle;
+    private void goToSelectCycle(){
+
         try {
-            selectCycle = FXMLLoader.load(getClass().getResource("selectCycle.fxml"));
-            scene1 = new Scene(selectCycle);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("selectCycle.fxml"));
+            Parent root = (Parent)fxmlLoader.load();
+            SelectController selectController = fxmlLoader.<SelectController>getController();
+            selectController.setOven(oven);
             Stage stage = (Stage)selectCycleBtn.getScene().getWindow();
-            stage.setScene(scene1);
+            stage.setScene(new Scene(root, 1000, 800));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -109,44 +103,41 @@ public class HomeController implements Initializable{
     }
 
     private void startListening() {
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                ovenTemperatureText.setText(oven.getCurrentOvenTemperature()+"");
-                LocalDateTime dateTime = LocalDateTime.now();
-                currentTimeText.setText(dateTime.getHour()+": "+dateTime.getMinute()+": "+dateTime.getSecond());
-                if(oven.getCurrentCycle() == null) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+            ovenTemperatureText.setText(oven.getCurrentOvenTemperature() + "");
+            LocalDateTime dateTime = LocalDateTime.now();
+            currentTimeText.setText(dateTime.getHour()+": "+dateTime.getMinute()+": "+dateTime.getSecond());
+            if(oven.getCurrentCycle() == null) {
 
-                    currentStepPane.setVisible(false);
-                    prevStepPane.setVisible(false);
-                    nextStepPane.setVisible(false);
-                }
-                if( oven.getCurrentCycle() != null && oven.getCurrentCycle().getCurrentStep() !=  null) {
-                    currentStepPane.setVisible(true);
-                    cuurentStepStarttxt.setText(oven.getCurrentCycle().getCurrentStep().getStartTemp()+"");
-                    cuurentStepEndTxt.setText(oven.getCurrentCycle().getCurrentStep().getEndTemp()+"");
-                    cuurentStepTimeTxt.setText(oven.getCurrentCycle().getCurrentStep().getTimeInMinutes()+"");
-                } else {
-                    currentStepPane.setVisible(false);
-                }
-                if( oven.getCurrentCycle() != null && oven.getCurrentCycle().getPreviousStep() !=  null) {
-                    prevStepPane.setVisible(true);
-                    previousStepStartTxt.setText(oven.getCurrentCycle().getPreviousStep().getStartTemp()+"");
-                    previousStepEndTxt.setText(oven.getCurrentCycle().getPreviousStep().getEndTemp()+"");
-                    previousStepTimeTxt.setText(oven.getCurrentCycle().getPreviousStep().getTimeInMinutes()+"");
-                } else {
-                    prevStepPane.setVisible(false);
-                }
-                if( oven.getCurrentCycle() != null && oven.getCurrentCycle().getNextStep() !=  null) {
-                    nextStepPane.setVisible(true);
-                    nextStepStartTxt.setText(oven.getCurrentCycle().getNextStep().getStartTemp()+"");
-                    nextStepStopTxt.setText(oven.getCurrentCycle().getNextStep().getEndTemp()+"");
-                    nextStepTimeTxt.setText(oven.getCurrentCycle().getNextStep().getTimeInMinutes()+"");
-                } else {
-                    nextStepPane.setVisible(false);
-                }
+                currentStepPane.setVisible(false);
+                prevStepPane.setVisible(false);
             }
-        }, 0, 1000);
+            if( oven.getCurrentCycle() != null && oven.getCurrentCycle().getCurrentStep() !=  null) {
+                currentStepPane.setVisible(true);
+                cuurentStepStarttxt.setText(oven.getCurrentCycle().getCurrentStep().getStartTemp()+"");
+                cuurentStepEndTxt.setText(oven.getCurrentCycle().getCurrentStep().getEndTemp()+"");
+                cuurentStepTimeTxt.setText(oven.getCurrentCycle().getCurrentStep().getTimeInMinutes()+"");
+            } else {
+                currentStepPane.setVisible(false);
+            }
+            if( oven.getCurrentCycle() != null && oven.getCurrentCycle().getPreviousStep() !=  null) {
+                prevStepPane.setVisible(true);
+                previousStepStartTxt.setText(oven.getCurrentCycle().getPreviousStep().getStartTemp()+"");
+                previousStepEndTxt.setText(oven.getCurrentCycle().getPreviousStep().getEndTemp()+"");
+                previousStepTimeTxt.setText(oven.getCurrentCycle().getPreviousStep().getTimeInMinutes()+"");
+            } else {
+                prevStepPane.setVisible(false);
+            }
+
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        }, 0, 1000);
     }
 }

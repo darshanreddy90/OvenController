@@ -25,6 +25,12 @@ public class CycleExecutor {
         if(oven.getCurrentCycle() == null) {
             return;
         }
+
+        if(oven.getCurrentCycle()!= cycle) {
+            cycle = oven.getCurrentCycle();
+            this.stepIterator = cycle.getCycleSteps().iterator();
+            currentStep = null;
+        }
         if(currentStep!= null && currentStep.getTimeRemaining() == 0) {
 //            currentStep.resetTimeRemaining();
             if(stepIterator.hasNext()) {
@@ -55,7 +61,12 @@ public class CycleExecutor {
     public void checkGrowth(){
         double growthRate= (Math.abs(currentStep.getStartTemp()-currentStep.getEndTemp())/currentStep.getTimeInMinutes());
         double currentTime= currentStep.getTimeInMinutes()-currentStep.getTimeRemaining();
-        double expectedTemp=  currentStep.getStartTemp() + (growthRate*(currentTime));
+        double expectedTemp = 0;
+        if(currentStep.getEndTemp() > currentStep.getStartTemp()) {
+            expectedTemp = currentStep.getStartTemp() + (growthRate * (currentTime));
+        }else {
+            expectedTemp = currentStep.getStartTemp() - (growthRate * (currentTime));
+        }
         if(oven.getCurrentOvenTemperature()>expectedTemp){
             oven.turnOvenOff();
         }else if(oven.getCurrentOvenTemperature()<expectedTemp){

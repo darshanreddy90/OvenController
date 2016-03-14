@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 
 public class Main extends Application {
 
@@ -28,6 +30,13 @@ public class Main extends Application {
         homeController.setOven(oven);
         primaryStage.setTitle("Oven Controller");
         primaryStage.setScene(new Scene(root, 1000, 800));
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        primaryStage.setX(bounds.getMinX());
+        primaryStage.setY(bounds.getMinY());
+        primaryStage.setWidth(bounds.getWidth());
+        primaryStage.setHeight(bounds.getHeight());
 
         primaryStage.show();
     }

@@ -75,7 +75,7 @@ public class Cycle {
 
     public static List<Cycle> cycleLoader() throws FileNotFoundException {
         Scanner scanner;
-        scanner = new Scanner(new File("C:\\Users\\dxr141430\\Documents\\GitHub\\OvenController\\src\\sample\\data.txt"));
+        scanner = new Scanner(new File("C:\\Users\\DarshanNarayana\\Documents\\GitHub\\OvenController\\src\\sample\\data.txt"));
         List<Cycle> cycles = new ArrayList<>();
         while (scanner.hasNextLine()){
             String row = scanner.nextLine();
@@ -92,5 +92,17 @@ public class Cycle {
             cycle.addStep(step);
         }
         return cycle;
+    }
+
+    public void setSteps(LinkedList<CycleStep> steps) {
+        this.cycleSteps = steps;
+    }
+
+    public String convertToString(){
+        String value = "\n"+name;
+        for(CycleStep step: cycleSteps) {
+            value+= "\t"+step.getStartTemp()+"\t"+step.getEndTemp()+"\t"+step.getTimeInMinutes();
+        }
+        return value;
     }
 }
